@@ -1,0 +1,32 @@
+﻿빌드 시작: 2017-11-01 오후 3:04:18
+     1>2 노드의 "C:\Users\USER\Documents\Visual Studio 2013\Projects\IOCP_EchoServer\IOCP_EchoServer\IOCP_EchoServer.vcxproj" 프로젝트(Build 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\IOCP_EchoServer.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\IOCP_EchoServer.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt IOCP_EchoServer.cpp NPacket.cpp StreamQueue.cpp
+         건너뛰고 있습니다... (관련된 변경 내용 없음)
+         StreamQueue.cpp
+         NPacket.cpp
+         IOCP_EchoServer.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\USER\Documents\Visual Studio 2013\Projects\IOCP_EchoServer\Debug\IOCP_EchoServer.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\USER\Documents\Visual Studio 2013\Projects\IOCP_EchoServer\Debug\IOCP_EchoServer.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\USER\Documents\Visual Studio 2013\Projects\IOCP_EchoServer\Debug\IOCP_EchoServer.lib" /MACHINE:X86 Debug\IOCP_EchoServer.obj
+         Debug\NPacket.obj
+         Debug\stdafx.obj
+         Debug\StreamQueue.obj
+     1>IOCP_EchoServer.obj : error LNK2019: __imp__accept@12 외부 기호(참조 위치: "unsigned int __stdcall AcceptThread(void *)" (?AcceptThread@@YGIPAX@Z) 함수)에서 확인하지 못했습니다.
+     1>IOCP_EchoServer.obj : error LNK2019: __imp__bind@12 외부 기호(참조 위치: "bool __cdecl initIOCPServer(void)" (?initIOCPServer@@YA_NXZ) 함수)에서 확인하지 못했습니다.
+     1>IOCP_EchoServer.obj : error LNK2019: __imp__htons@4 외부 기호(참조 위치: "bool __cdecl initIOCPServer(void)" (?initIOCPServer@@YA_NXZ) 함수)에서 확인하지 못했습니다.
+     1>IOCP_EchoServer.obj : error LNK2019: __imp__listen@8 외부 기호(참조 위치: "bool __cdecl initIOCPServer(void)" (?initIOCPServer@@YA_NXZ) 함수)에서 확인하지 못했습니다.
+     1>IOCP_EchoServer.obj : error LNK2019: __imp__shutdown@8 외부 기호(참조 위치: "void __cdecl DisconnectSession(struct st_SESSION *)" (?DisconnectSession@@YAXPAUst_SESSION@@@Z) 함수)에서 확인하지 못했습니다.
+     1>IOCP_EchoServer.obj : error LNK2019: __imp__socket@12 외부 기호(참조 위치: "bool __cdecl initIOCPServer(void)" (?initIOCPServer@@YA_NXZ) 함수)에서 확인하지 못했습니다.
+     1>IOCP_EchoServer.obj : error LNK2019: __imp__WSAStartup@8 외부 기호(참조 위치: "bool __cdecl initIOCPServer(void)" (?initIOCPServer@@YA_NXZ) 함수)에서 확인하지 못했습니다.
+     1>IOCP_EchoServer.obj : error LNK2019: __imp__WSAGetLastError@0 외부 기호(참조 위치: "unsigned int __stdcall WorkerThread(void *)" (?WorkerThread@@YGIPAX@Z) 함수)에서 확인하지 못했습니다.
+     1>IOCP_EchoServer.obj : error LNK2019: __imp__WSARecv@28 외부 기호(참조 위치: "bool __cdecl RecvPost(struct st_SESSION *)" (?RecvPost@@YA_NPAUst_SESSION@@@Z) 함수)에서 확인하지 못했습니다.
+     1>IOCP_EchoServer.obj : error LNK2019: __imp__WSASend@28 외부 기호(참조 위치: "bool __cdecl SendPost(struct st_SESSION *)" (?SendPost@@YA_NPAUst_SESSION@@@Z) 함수)에서 확인하지 못했습니다.
+     1>IOCP_EchoServer.obj : error LNK2019: _InetPtonW@12 외부 기호(참조 위치: "bool __cdecl initIOCPServer(void)" (?initIOCPServer@@YA_NXZ) 함수)에서 확인하지 못했습니다.
+     1>C:\Users\USER\Documents\Visual Studio 2013\Projects\IOCP_EchoServer\Debug\IOCP_EchoServer.exe : fatal error LNK1120: 11개의 확인할 수 없는 외부 참조입니다.
+     1>"C:\Users\USER\Documents\Visual Studio 2013\Projects\IOCP_EchoServer\IOCP_EchoServer\IOCP_EchoServer.vcxproj" 프로젝트를 빌드했습니다(Build 대상). - 실패
+
+빌드하지 못했습니다.
+
+경과 시간: 00:00:01.55

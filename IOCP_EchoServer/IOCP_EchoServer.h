@@ -9,21 +9,42 @@ enum
 
 typedef struct st_SESSION
 {
-	SOCKET _socket;
+	__int64			_iSessionID;
 
-	CAyaStreamSQ _RecvQ;
-	CAyaStreamSQ _SendQ;
+	SOCKET			_socket;
 
-	OVERLAPPED _RecvOverlapped;
-	OVERLAPPED _SendOverlapped;
+	CAyaStreamSQ	_RecvQ;
+	CAyaStreamSQ	_SendQ;
 
-	LONG _lIOCount;
-	bool _bSendFlag;
+	OVERLAPPED		_RecvOverlapped;
+	OVERLAPPED		_SendOverlapped;
+
+	LONG			_lIOCount;
+	bool			_bSendFlag;
 } SESSION;
 
 
-#define dfSERVER_PORT			5000
+#define dfSERVER_PORT			6000
 #define dfSERVER_IP				L"127.0.0.1"
+
+bool					initIOCPServer();
+
+unsigned __stdcall		AcceptThread(LPVOID acceptArg);
+unsigned __stdcall		WorkerThread(LPVOID workerArg);
+
+void					CompleteRecv(SESSION *pSession, DWORD dwTransferred);
+void					CompleteSend(SESSION *pSession, DWORD dwTransferred);
+
+bool					SendPacket(__int64 iSessionID, __int64 iPacket);
+
+SESSION					*CreateSession(SOCKET socket);
+
+bool					RecvPost(SESSION *pSession);
+bool					SendPost(SESSION *pSession);
+
+void					DisconnectSession(SESSION *pSession);
+void					ReleaseSession(SESSION *pSession);
+void					SocketClose(SOCKET socket);
 
 #endif
 

@@ -322,42 +322,38 @@ bool				SendPost(SESSION *pSession)
 	if (true == InterlockedCompareExchange((LONG *)&pSession->_bSendFlag, true, false))
 		return false;
 
-	do
+	//////////////////////////////////////////////////////////////////////////////
+	// WSABUF 등록
+	//////////////////////////////////////////////////////////////////////////////
+	wBuf[0].buf = pSession->_SendQ.GetReadBufferPtr();
+	wBuf[0].len = pSession->_SendQ.GetNotBrokenGetSize();
+
+	if (pSession->_SendQ.GetUseSize() > pSession->_SendQ.GetNotBrokenGetSize())
 	{
+		wBuf[1].buf = pSession->_SendQ.GetBufferPtr();
+		wBuf[1].len = pSession->_SendQ.GetUseSize() - pSession->_SendQ.GetNotBrokenGetSize();
 
-		//////////////////////////////////////////////////////////////////////////////
-		// WSABUF 등록
-		//////////////////////////////////////////////////////////////////////////////
-		wBuf[0].buf = pSession->_SendQ.GetReadBufferPtr();
-		wBuf[0].len = pSession->_SendQ.GetNotBrokenGetSize();
+		iCount++;
+	}
 
-		if (pSession->_SendQ.GetUseSize() > pSession->_SendQ.GetNotBrokenGetSize())
+
+	InterlockedIncrement64((LONG64 *)&pSession->_lIOCount);
+	retval = WSASend(pSession->_socket, wBuf, iCount, &dwSendSize, dwflag, &pSession->_SendOverlapped, NULL);
+
+	//////////////////////////////////////////////////////////////////////////////
+	// WSASend Error
+	//////////////////////////////////////////////////////////////////////////////
+	if (retval == SOCKET_ERROR)
+	{
+		int iErrorCode = GetLastError();
+		if (iErrorCode != WSA_IO_PENDING)
 		{
-			wBuf[1].buf = pSession->_SendQ.GetBufferPtr();
-			wBuf[1].len = pSession->_SendQ.GetUseSize() - pSession->_SendQ.GetNotBrokenGetSize();
+			if (0 == InterlockedDecrement64((LONG64 *)&pSession->_lIOCount))
+				ReleaseSession(pSession);
 
-			iCount++;
+			return FALSE;
 		}
-
-
-		InterlockedIncrement64((LONG64 *)&pSession->_lIOCount);
-		retval = WSASend(pSession->_socket, wBuf, iCount, &dwSendSize, dwflag, &pSession->_SendOverlapped, NULL);
-
-		//////////////////////////////////////////////////////////////////////////////
-		// WSASend Error
-		//////////////////////////////////////////////////////////////////////////////
-		if (retval == SOCKET_ERROR)
-		{
-			int iErrorCode = GetLastError();
-			if (iErrorCode != WSA_IO_PENDING)
-			{
-				if (0 == InterlockedDecrement64((LONG64 *)&pSession->_lIOCount))
-					ReleaseSession(pSession);
-
-				return FALSE;
-			}
-		}
-	} while (0);
+	}
 
 	return TRUE;
 }

@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IOCP_EchoServer.h" />
+    <ClInclude Include="LanServer.h" />
     <ClInclude Include="NPacket.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StreamQueue.h" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IOCP_EchoServer.cpp" />
+    <ClCompile Include="LanServer.cpp" />
     <ClCompile Include="NPacket.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
